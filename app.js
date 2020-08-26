@@ -65,11 +65,6 @@ app.use((error, req, res, next) => {
 
 
 
-
-
-
-
-
 mongoose.connect( connection_config.database_url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
