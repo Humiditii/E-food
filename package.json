@@ -4,7 +4,10 @@
   "description": "E food order and delivery",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec babel-node app.js",
+    "start": "babel-node app.js",
+    "kill": "killall -9 node"
   },
   "repository": {
     "type": "git",
@@ -32,5 +35,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.0",
     "validatorjs": "^3.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
