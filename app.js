@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import authRoute from './Routes/AuthRoutes';
 
 
 dotenv.config();
@@ -33,8 +34,11 @@ app.use(cors());
 
 //Application routes
 
+app.use('/api/v1/', authRoute);
+
 //routes ends here
 app.use('/', (req, res)=> {
+    //console.log(req.body)
     res.status(200).json({
         statusCode: 200,
         message: 'Welcome to the entry point to the api'
@@ -52,7 +56,7 @@ app.all( '*',(req, res, next)=> {
 
 
 app.use((error, req, res, next) => {
-    //console.log(error);
+    console.log(error);
     const status = error.statusCode || 500;
     const message = error.message;
 
