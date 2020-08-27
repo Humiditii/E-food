@@ -58,7 +58,8 @@ class AuthController {
                 if(comparePassword){
                     const user_data = {
                         email: findUser.email,
-                        id: findUser._id
+                        id: findUser._id,
+                        role: findUser.role
                     }
                     const token = Utils.generateToken(user_data)
             
@@ -70,11 +71,35 @@ class AuthController {
                 }
             }
         } catch (err) {
-            return Utils.appError(err, next)
+            return Utils.appError(err, next);
         }
     }
 
-    static changePassword(req, res, next){
+    static async changePassword(req, res, next){
+
+        const {role, userId} = req;
+
+        const { prePassword, password } = req.body;
+
+        const user = await Auth.findById(userId)
+
+        try {
+            if( Utils.decodePwd(prePassword, user.password) ){
+
+                user.password = Utils.hashPassword(password);
+
+                user.save().then( changed => {
+                    return Utils.api_response(res, 200, 'Password Changed')
+                }).catch( err => {
+                    return Utils.appError(err, next)
+                })
+
+            }else{
+                return Utils.api_response(res, 400, 'Incorrect Old password')
+            }
+        } catch (err) {
+            return Utils.appError(err, next)
+        }
 
     }
 
