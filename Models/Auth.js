@@ -60,8 +60,6 @@ const authSchema = new Schema({
         default: Date.now()
     }
 
-
-
 })
 
 
