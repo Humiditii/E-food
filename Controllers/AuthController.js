@@ -103,7 +103,21 @@ class AuthController {
 
     }
 
-    static sendResetLink(req, res, next){
+    static async sendResetLink(req, res, next){
+        const {email} = req.body;
+
+        const findUser = await Auth.findOne({email:email})
+
+        try {
+            if(!findUser){
+                return Utils.api_response(res, 400, 'Email doesn\'t match any account!!! ')
+            }else{
+                const resetToken = Utils.randomStr();
+                
+            }
+        } catch (error) {
+            
+        }
 
     }
 
