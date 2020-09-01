@@ -50,7 +50,7 @@ const authSchema = new Schema({
             type: String,
             default: null
         },
-        expiryDte: {
+        expiryDate: {
             type: Date,
             default: null
         }
